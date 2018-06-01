@@ -14,6 +14,7 @@
 
 import sys
 
+import json
 import markovify
 import os
 import random
@@ -54,8 +55,8 @@ base_dir = os.path.dirname(os.path.realpath(__file__))
 #
 # model_alexcity = markovify.combine([model_alex, model_jerkcity], [1.5, 1])
 
-with open(os.path.join(base_dir, 'qb.json')) as f:
-    model_qb = markovify.NewlineText.from_json(f.read())
+with open(os.path.join(base_dir, 'lines.txt')) as f:
+    model_qb = markovify.NewlineText(f, retain_original=False)
 
 
 @app.route("/callback", methods=['POST'])
