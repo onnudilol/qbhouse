@@ -8,8 +8,6 @@ line-bot-sdk = "*"
 markovify = "*"
 flask = "*"
 ipython = "*"
+uwsgi = "*"
 
 [dev-packages]
-
-[requires]
-python_version = "3.6"
