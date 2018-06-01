@@ -82,7 +82,7 @@ def callback():
 def handle_text_message(event):
     text = event.message.text
 
-    if '@QB House' in text:
+    if text.startswith('qb'):
         text = model_qb.make_short_sentence(280)
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
 
