@@ -82,8 +82,8 @@ def callback():
 def handle_text_message(event):
     text = event.message.text
 
-    if text.startswith('Qb'):
-        text = model_qb.make_short_sentence(280)
+    if text.startswith('Qb') or text.startswith('qb'):
+        text = model_qb.make_sentence_with_start(beginning=text[1], strict=False)
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
 
     elif random.random() < 0.05:
