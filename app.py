@@ -14,14 +14,15 @@
 
 import sys
 
+import json
+import markovify
 import os
+import random
 from argparse import ArgumentParser
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-import markovify
-import random
 
 app = Flask(__name__)
 
@@ -43,16 +44,19 @@ handler = WebhookHandler(channel_secret)
 # generate markov models
 base_dir = os.path.dirname(os.path.realpath(__file__))
 
-with open(os.path.join(base_dir, 'alex_jones.txt')) as f:
-    alex = f.read()
+# with open(os.path.join(base_dir, 'alex_jones.txt')) as f:
+#     alex = f.read()
+#
+# with open(os.path.join(base_dir, 'jerkcity.txt')) as f:
+#     jerkcity = f.read()
+#
+# model_alex = markovify.Text(alex)
+# model_jerkcity = markovify.Text(jerkcity)
+#
+# model_alexcity = markovify.combine([model_alex, model_jerkcity], [1.5, 1])
 
-with open(os.path.join(base_dir, 'jerkcity.txt')) as f:
-    jerkcity = f.read()
-
-model_alex = markovify.Text(alex)
-model_jerkcity = markovify.Text(jerkcity)
-
-model_alexcity = markovify.combine([model_alex, model_jerkcity], [1.5, 1])
+with open(os.path.join(base_dir, 'qb.json'), 'w') as f:
+    model_qb = markovify.Text.from_json(json.load(f))
 
 
 @app.route("/callback", methods=['POST'])
@@ -79,7 +83,7 @@ def handle_text_message(event):
     text = event.message.text
 
     if random.random() < 0.1:
-        text = model_alexcity.make_sentence()
+        text = model_qb.make_sentence()
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
 
 
