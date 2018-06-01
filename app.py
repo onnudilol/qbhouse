@@ -55,7 +55,7 @@ base_dir = os.path.dirname(os.path.realpath(__file__))
 #
 # model_alexcity = markovify.combine([model_alex, model_jerkcity], [1.5, 1])
 
-with open(os.path.join(base_dir, 'qb.json'), 'w') as f:
+with open(os.path.join(base_dir, 'qb.json')) as f:
     model_qb = markovify.Text.from_json(json.load(f))
 
 
