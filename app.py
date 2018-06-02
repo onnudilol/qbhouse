@@ -52,7 +52,7 @@ base_dir = os.path.dirname(os.path.realpath(__file__))
 # model_alex = markovify.Text(alex)
 # model_jerkcity = markovify.Text(jerkcity)
 #
-# model_alexcity = markovify.combine([model_alex, model_jerkcity], [1.5, 1])
+# model_qb = markovify.combine([model_alex, model_jerkcity], [1.5, 1])
 
 with open(os.path.join(base_dir, 'lines.txt')) as f:
     model_qb = markovify.NewlineText(f, retain_original=False)
