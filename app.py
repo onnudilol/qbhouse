@@ -82,16 +82,21 @@ def handle_text_message(event):
     text = event.message.text
 
     if text.startswith('Qb') or text.startswith('qb'):
-        text = model_qb.make_sentence_with_start(beginning=text.split()[1], strict=False)
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
+        response = model_qb.make_sentence_with_start(beginning=text.split()[1], strict=False)
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=response))
 
-    elif random.random() < 0.05:
-        text = model_qb.make_short_sentence(280)
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
+    else:
 
         if random.random() < 0.5:
-            with open('new_lines.txt', 'a') as f:
-                f.write('{}\n'.format(text))
+
+            if event.source.user_id != 'nrl8938i':
+
+                with open('new_lines.txt', 'a') as f:
+                    f.write('{}\n'.format(text))
+
+        if random.random() < 0.05:
+            response = model_qb.make_short_sentence(280)
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=response))
 
 
 if __name__ == "__main__":
