@@ -89,7 +89,7 @@ def handle_text_message(event):
 
         if random.random() < 0.5:
 
-            if event.source.user_id != 'nrl8938i':
+            if event.source.user_id != 'nrl8938i' and not text.startswith('http'):
 
                 with open('new_lines.txt', 'a') as f:
                     f.write('{}\n'.format(text))
