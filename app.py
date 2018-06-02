@@ -90,7 +90,7 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
 
         if random.random() < 0.5:
-            with open('new_lines.txt', 'w') as f:
+            with open('new_lines.txt', 'a') as f:
                 f.write('{}\n'.format(text))
 
 
