@@ -14,7 +14,6 @@
 
 import sys
 
-import json
 import markovify
 import os
 import random
@@ -90,18 +89,18 @@ def handle_text_message(event):
         text = model_qb.make_short_sentence(280)
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
 
+        if random.random() < 0.5:
+            with open('new_lines.txt', 'w') as f:
+                f.write('{}\n'.format(text))
+
 
 if __name__ == "__main__":
 
-    try:
-        arg_parser = ArgumentParser(
-            usage='Usage: python ' + __file__ + ' [--port <port>] [--help]'
-        )
-        arg_parser.add_argument('-p', '--port', type=int, default=8000, help='port')
-        arg_parser.add_argument('-d', '--debug', default=False, help='debug')
-        options = arg_parser.parse_args()
+    arg_parser = ArgumentParser(
+        usage='Usage: python ' + __file__ + ' [--port <port>] [--help]'
+    )
+    arg_parser.add_argument('-p', '--port', type=int, default=8000, help='port')
+    arg_parser.add_argument('-d', '--debug', default=False, help='debug')
+    options = arg_parser.parse_args()
 
-        app.run(debug=options.debug, port=options.port)
-
-    finally:
-        pass
+    app.run(debug=options.debug, port=options.port)
