@@ -92,7 +92,7 @@ def handle_text_message(event):
             if event.source.user_id != 'nrl8938i' and not text.startswith('http'):
 
                 with open('new_lines.txt', 'a') as f:
-                    f.write('{}\n'.format(text))
+                    f.write('{}\n'.format(text.lower()))
 
         if random.random() < 0.05:
             response = model_qb.make_short_sentence(280)
